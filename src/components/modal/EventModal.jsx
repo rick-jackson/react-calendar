@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { deleteEvent, updateEvent } from "../../gateway/events";
 import "./modal.scss";
@@ -20,8 +20,13 @@ const Modal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const updateEvents = events.map((el) => {
-      updateEvent(id, eventValue).then(() => {
+    const updateEvents = {
+      ...eventValue,
+      date: moment(eventValue.date).format("YYYY-M-D"),
+    };
+
+    events.map((el) => {
+      updateEvent(id, updateEvents).then(() => {
         ediEvents();
       });
       return el;

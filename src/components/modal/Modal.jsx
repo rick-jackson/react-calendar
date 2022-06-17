@@ -8,8 +8,8 @@ const Modal = ({ toggleCreateModal, showCreateModal, ediEvents }) => {
     title: "Title",
     description: "",
     date: moment(new Date()).format("YYYY-MM-DD"),
-    startTime: moment(new Date()).format("H:mm"),
-    endTime: moment(new Date()).add(1, "hours").format("H:mm"),
+    startTime: moment(new Date()).format("HH:mm"),
+    endTime: moment(new Date()).add(1, "hours").format("HH:mm"),
   });
 
   const getFormValue = (e) => {

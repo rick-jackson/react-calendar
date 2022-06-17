@@ -17,8 +17,8 @@ const Day = ({ dataDay, dayEvents, events, ediEvents, weekStartDate }) => {
 
         return (
           <Hour
-          dataDay={dataDay}
-          weekStartDate={weekStartDate}
+            dataDay={dataDay}
+            weekStartDate={weekStartDate}
             key={dataDay + hour}
             dataHour={hour}
             hourEvents={hourEvents}
