@@ -16,12 +16,6 @@ cd calendar
 npm i
 ```
 
-For production environments...
-
-```sh
-npm install --production
-NODE_ENV=production node app
-```
 
 
 ## Development
