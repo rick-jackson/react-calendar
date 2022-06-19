@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import propTypes from "prop-types";
 import Modal from "../modal/Modal";
 import moment from "moment";
 import "./header.scss";
 
-const Header = ({ ediEvents, weekStartDate, setWeekStartDate }) => {
+const Header = ({ editEvents, weekStartDate, setWeekStartDate }) => {
   const [showCreateModal, toggleCreateModal] = useState(false);
 
   return (
@@ -12,7 +13,7 @@ const Header = ({ ediEvents, weekStartDate, setWeekStartDate }) => {
         <Modal
           showCreateModal={showCreateModal}
           toggleCreateModal={toggleCreateModal}
-          ediEvents={ediEvents}
+          editEvents={editEvents}
         />
       )}
       <header className="header">
@@ -59,3 +60,10 @@ const Header = ({ ediEvents, weekStartDate, setWeekStartDate }) => {
 };
 
 export default Header;
+
+
+
+Header.propTypes = {
+  editEvents: propTypes.func.isRequired,
+  setWeekStartDate: propTypes.func.isRequired,
+};

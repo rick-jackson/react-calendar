@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import moment from "moment";
+import propTypes from "prop-types";
 import "./modal.scss";
 import { createEvent } from "../../gateway/events";
 
-const Modal = ({ toggleCreateModal, showCreateModal, ediEvents }) => {
+const Modal = ({ toggleCreateModal, showCreateModal, editEvents }) => {
   const [eventValue, setEventValue] = useState({
     title: "Title",
     description: "",
@@ -17,12 +18,16 @@ const Modal = ({ toggleCreateModal, showCreateModal, ediEvents }) => {
   };
 
   const handleSubmit = (e) => {
+    if (eventValue.startTime > eventValue.endTime) {
+      alert("error");
+      return;
+    }
     e.preventDefault();
     const newEvent = {
       ...eventValue,
       date: moment(eventValue.date).format("YYYY-M-D"),
     };
-    createEvent(newEvent).then(() => ediEvents());
+    createEvent(newEvent).then(() => editEvents());
     toggleCreateModal(!showCreateModal);
   };
 
@@ -87,3 +92,9 @@ const Modal = ({ toggleCreateModal, showCreateModal, ediEvents }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  toggleCreateModal: propTypes.func.isRequired,
+  showCreateModal: propTypes.bool.isRequired,
+  editEvents: propTypes.func.isRequired,
+};

@@ -8,44 +8,45 @@ export const createEvent = (eventData) => {
     body: JSON.stringify(eventData),
   }).then((response) => {
     if (!response.ok) {
-      throw new Error("Failed to create task");
+      alert("Internal Server Error. Failed to create event")
+      
     }
   });
 };
 
 export const fetchEvents = () => {
   return fetch(baseUrl)
-    .then((res) => {
-      if (!res.ok) {
+    .then((response) => {
+      if (!response.ok) {
         alert("Internal Server Error. Can't display events")
         return [];
       }
-      return res.json();
+      return response.json();
     })
     
-    .then((tasksList) => {
-      return tasksList;
+    .then((events) => {
+      return events;
     })
 };
 
-export const updateEvent = (taskId, taskData) => {
-  return fetch(`${baseUrl}/${taskId}`, {
+export const updateEvent = (eventId, eventData) => {
+  return fetch(`${baseUrl}/${eventId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(taskData),
+    body: JSON.stringify(eventData),
   }).then((response) => {
     if (!response.ok) {
-      throw new Error("Failed to create task");
+      alert("Internal Server Error. Failed to update event")
     }
   });
 };
 
-export const deleteEvent = (taskId) => {
-  return fetch(`${baseUrl}/${taskId}`, {
+export const deleteEvent = (eventId) => {
+  return fetch(`${baseUrl}/${eventId}`, {
     method: "DELETE",
   }).then((response) => {
     if (!response.ok) {
-      throw new Error("Failed remove  task");
+      alert("Internal Server Error. Failed to remove event")
     }
   });
 };

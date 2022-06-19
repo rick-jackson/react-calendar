@@ -11,10 +11,10 @@ const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
 
   useEffect(() => {
-    ediEvents(event);
+    editEvents(event);
   }, []);
 
-  const ediEvents = () => {
+  const editEvents = () => {
     fetchEvents().then((response) => {
       setEvents(response);
     });
@@ -25,13 +25,13 @@ const App = () => {
   return (
     <>
       <Header
-        ediEvents={ediEvents}
+        editEvents={editEvents}
         setWeekStartDate={setWeekStartDate}
         weekStartDate={weekStartDate}
       />
       <Calendar
         weekDates={weekDates}
-        ediEvents={ediEvents}
+        editEvents={editEvents}
         events={event}
         weekStartDate={weekStartDate}
       />

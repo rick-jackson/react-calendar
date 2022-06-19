@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import propTypes from "prop-types";
 import moment from "moment";
 import { deleteEvent, updateEvent } from "../../gateway/events";
 import "./modal.scss";
@@ -9,7 +10,7 @@ const Modal = ({
   event,
   events,
   id,
-  ediEvents,
+  editEvents,
 }) => {
   const [eventValue, setEventValue] = useState(...event);
 
@@ -27,18 +28,18 @@ const Modal = ({
 
     events.map((el) => {
       updateEvent(id, updateEvents).then(() => {
-        ediEvents();
+        editEvents();
       });
       return el;
     });
-    ediEvents(updateEvents);
+    editEvents(updateEvents);
     toggleEventModal(!showEventModal);
   };
 
   const handleRemove = (e) => {
     e.preventDefault();
     deleteEvent(id).then(() => {
-      ediEvents();
+      editEvents();
     });
 
     toggleEventModal(!showEventModal);
@@ -114,3 +115,12 @@ const Modal = ({
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  toggleEventModal: propTypes.func.isRequired,
+  event: propTypes.array.isRequired,
+  events: propTypes.array.isRequired,
+  id: propTypes.string.isRequired,
+  editEvents: propTypes.func.isRequired,
+  showEventModal: propTypes.bool.isRequired,
+};
