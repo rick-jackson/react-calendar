@@ -13,15 +13,22 @@ const Modal = ({ toggleCreateModal, showCreateModal, editEvents }) => {
     endTime: moment(new Date()).add(1, "hours").format("HH:mm"),
   });
 
+  const [errorText, setErrorText] = useState("");
+  const [submitButtonEnable, toggleSubmitButtonEnable] = useState(false);
+
   const getFormValue = (e) => {
     setEventValue({ ...eventValue, [e.target.name]: e.target.value });
+
+    if (eventValue.startTime > eventValue.endTime) {
+      setErrorText("The event must start and end in one day");
+      toggleSubmitButtonEnable(true);
+    } else {
+      setErrorText("");
+      toggleSubmitButtonEnable(false);
+    }
   };
 
   const handleSubmit = (e) => {
-    if (eventValue.startTime > eventValue.endTime) {
-      alert("error");
-      return;
-    }
     e.preventDefault();
     const newEvent = {
       ...eventValue,
@@ -77,10 +84,14 @@ const Modal = ({ toggleCreateModal, showCreateModal, editEvents }) => {
               placeholder="Description"
               className="event-form__field"
             ></textarea>
+
+            <span className="event-form__error-text">{errorText}</span>
+
             <button
               type="submit"
               className="event-form__submit-btn"
               onClick={handleSubmit}
+              disabled={submitButtonEnable}
             >
               Create
             </button>

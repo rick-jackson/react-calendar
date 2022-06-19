@@ -19,7 +19,7 @@ const Hour = ({
     const interval = setInterval(() => {
       getTopLine(new Date().getMinutes());
     }, 60000);
-    // return clearInterval(interval);
+    return clearInterval(interval);
   }, []);
 
   return (
